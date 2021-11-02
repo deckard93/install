@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutModificationTemplate
+    xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+    xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout"
+    xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout"
+    xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout"
+    Version="1">
+  <CustomTaskbarLayoutCollection>
+    <defaultlayout:TaskbarLayout>
+      <taskbar:TaskbarPinList>
+        <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Notepad++\notepad++.exe" />
+		<taskbar:UWA AppUserModelID="SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Google\Chrome\Application\chrome.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft VS Code\Code.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.3\bin\idea64.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Android\Android Studio\bin\studio64.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\DBeaver\dbeaver.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%HOMEPATH%\AppData\Local\WhatsApp\WhatsApp.exe" />
+		<taskbar:UWA AppUserModelID="Microsoft.WindowsTerminal_8wekyb3d8bbwe!App" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\VMware\VMware Player\vmplayer.exe" />
+		<taskbar:UWA AppUserModelID="Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe!App" />
+      </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+  </CustomTaskbarLayoutCollection>
+</LayoutModificationTemplate>
