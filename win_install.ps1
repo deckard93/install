@@ -1,5 +1,7 @@
+$repo = "https://raw.githubusercontent.com/deckard93/install/master"
+
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 $StartTime = Get-Date
 
@@ -24,8 +26,9 @@ choco install linkshellextension -y
 choco install netlimiter -y
 choco install autohotkey -y
 choco install discord -y
+choco install qbittorrent -y
 #choco install steam-client -y
-#choco install qbittorrent -y
+
 
 # dev tools
 choco install git.install -y
@@ -37,9 +40,9 @@ choco install virtualbox -y
 choco install postman -y
 choco install dbeaver -y
 choco install dotnet4.0 -y
-choco install wsl -y
-choco install wsl2 -y
-choco install wsl-ubuntu-2004 -y # needs restart after installing wsl
+#choco install wsl -y
+#choco install wsl2 -y
+#choco install wsl-ubuntu-2004 -y # needs restart after installing wsl
 choco install androidstudio -y
 choco install visualstudio2019community -y
 choco install intellijidea-community -y
@@ -56,9 +59,8 @@ choco install docker-desktop -y
 
 # cleanup any new shortcuts
 $Desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
-$Desktops | Get-ChildItem -Filter "*.lnk" | Remove-Item
-$Desktops | Get-ChildItem -Filter "*.url" | Remove-Item -Force
-# $Desktops | Get-ChildItem -Filter "*.lnk" -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -gt $StartTime } | Remove-Item
+$Desktops | Get-ChildItem -Filter "*.url" | Remove-Item -Force # some win images have extra urls on desktop
+$Desktops | Get-ChildItem -Filter "*.lnk" -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -gt $StartTime } | Remove-Item
 
 
 # disable files/folders getting autoadded to quick access
@@ -81,9 +83,12 @@ Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\
 ((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | ForEach-Object { $_.Verbs() | ?{$_.Name.replace('&','') -match 'Unpin from taskbar'} | %{$_.DoIt(); $exec = $true} })
 # import taskbar layout
 $temp_file = New-TemporaryFile
-$repo = "https://raw.githubusercontent.com/deckard93/install/master"
 Invoke-WebRequest -uri "$repo/taskbar.xml" -OutFile $temp_file
 Import-StartLayout -LayoutPath $temp_file -MountPath "C:\"
+
+
+# apply windows terminal settings file
+Invoke-WebRequest -uri "$repo/win_terminal.json" -OutFile C:\Users\pteo9\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 
 
 # install WSL
