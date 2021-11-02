@@ -1,6 +1,7 @@
-$StartTime = Get-Date
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+$StartTime = Get-Date
 
 choco install chocolatey-core.extension -y
 choco install googlechrome -y
@@ -27,7 +28,7 @@ choco install discord -y
 #choco install qbittorrent -y
 
 # dev tools
-choco install git.install -y 
+choco install git.install -y
 choco install microsoft-windows-terminal -y
 choco install vscode -y
 choco install javaruntime -y
@@ -63,17 +64,26 @@ $Desktops | Get-ChildItem -Filter "*.url" | Remove-Item -Force
 # disable files/folders getting autoadded to quick access
 Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Type 'DWord' -Name 'ShowFrequent' -value '0'
 Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Type 'DWord' -Name 'ShowRecent' -value '0'
-# open explorer to my pc by default 
+# open explorer to my pc by default
 Set-Itemproperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Type 'DWord' -Name 'LaunchTo' -value '1'
+
 
 # configure user account control settings (UAC)
 New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -PropertyType DWord -Value 0 -Force
 New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name PromptOnSecureDesktop -PropertyType DWord -Value 0 -Force
 
-# hide icons on taskbar
+
+# hide special icons on taskbar
 Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchBoxTaskbarMode -Value 0 -Type DWord -Force
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowTaskViewButton -Value 0 -Type DWord -Force
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowCortanaButton -Value 0 -Type DWord -Force
+# remove default pinned apps from taskbar
+((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | ForEach-Object { $_.Verbs() | ?{$_.Name.replace('&','') -match 'Unpin from taskbar'} | %{$_.DoIt(); $exec = $true} })
+# import taskbar layout
+$temp_file = New-TemporaryFile
+$repo = "https://raw.githubusercontent.com/deckard93/install/master"
+Invoke-WebRequest -uri "$repo/taskbar.xml" -OutFile $temp_file
+Import-StartLayout -LayoutPath $temp_file -MountPath "C:\"
 
 
 # install WSL
