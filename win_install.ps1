@@ -29,6 +29,9 @@ choco install discord -y
 choco install qbittorrent -y
 #choco install steam-client -y
 
+# non-choclatey items
+# GDS video thumbnailer https://www.gdsoftware.dk/More.aspx?id=7
+
 
 # dev tools
 choco install git.install -y
@@ -40,9 +43,6 @@ choco install virtualbox -y
 choco install postman -y
 choco install dbeaver -y
 choco install dotnet4.0 -y
-#choco install wsl -y
-#choco install wsl2 -y
-#choco install wsl-ubuntu-2004 -y # needs restart after installing wsl
 choco install androidstudio -y
 choco install visualstudio2019community -y
 choco install intellijidea-community -y
@@ -92,9 +92,30 @@ Invoke-WebRequest -uri "$repo/win_terminal.json" -OutFile C:\Users\pteo9\AppData
 
 
 # install WSL
-#Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu.appx -UseBasicParsing
-#Add-AppxPackage .\Ubuntu.appx
-# needs restart here
-#wsl --set-default-version 1
+choco install wsl -y
+choco install wsl-ubuntu-2004 -y
+# install WSL
+# First define path to the installed ubuntu2004.exe
+$str1="/Users/"
+$str2="/AppData/Local/Microsoft/WindowsApps/ubuntu2004"
+$hdd_name=(Get-WmiObject Win32_OperatingSystem).SystemDrive
+$username=$env:UserName
+[String] $ubuntu1804_path=$hdd_name+$str1+$username+$str2
 
+
+# let root be default username
+$ubuntu1804_path=Ubuntu2004
+$str1=" install --root"
+$set_user=$ubuntu1804_path+$str1
+Write-Output $set_user
+invoke-expression -Command $set_user 
+
+Ubuntu2004 install --root
+Ubuntu2004 run useradd -m tpetrescu
+Ubuntu2004 run usermod --password '$(echo 1 | openssl passwd -1 -stdin)' tpetrescu
+Ubuntu2004 run usermod -aG sudo tpetrescu
+Ubuntu2004 config --default-user tpetrescu
+
+
+Write-Host "Done with setup."
 
