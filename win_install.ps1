@@ -124,7 +124,7 @@ function SetupWSL() {
 }
 
 function InstallOffice() {
-    choco install microsoft-office-deployment --params '/64bit /Product:Professional2019Retail /Exclude=Publisher,Lync,Groove,Access,Publisher'
+    choco install -y microsoft-office-deployment --params '/64bit /Product:Professional2019Retail /Exclude=Publisher,Lync,Groove,Access,Publisher'
 }
 
 function FirstBoot() {
@@ -132,6 +132,7 @@ function FirstBoot() {
     InstallChoclatey 
     InstallApps $desktops $basic_apps
     InstallApps $desktops $dev_apps
+    InstallOffice
     ImportTaskbarLayout $repo
     InstallConfigFiles $repo
 }
