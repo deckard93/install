@@ -112,7 +112,7 @@ function InstallConfigFiles($repo) {
 }
 
 function SetupWSL() {
-    choco install wsl-ubuntu-2004 -y
+    choco install wsl-ubuntu-1804 -y
     $username = "tpetrescu"
     $password = "1234"
     Ubuntu2004 install --root
@@ -121,6 +121,10 @@ function SetupWSL() {
     Ubuntu2004 run usermod --password $password $username
     Ubuntu2004 run usermod -aG sudo $username
     Ubuntu2004 config --default-user $username
+}
+
+function InstallOffice() {
+    choco install microsoft-office-deployment --params '/64bit /Product:Professional2019Retail /Exclude=Publisher,Lync,Groove,Access,Publisher'
 }
 
 function FirstBoot() {
