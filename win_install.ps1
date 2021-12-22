@@ -1,3 +1,57 @@
+$global:state_file = "c:\scripts\last_stage.dat"
+$global:check_stage = 0
+
+function Get-LastStage {
+    if (Test-Path $global:state_file -PathType leaf) {
+        $last_stage = [int] (Get-Content $global:state_file)
+    } else {
+        $last_stage = 0
+        $last_stage > $global:state_file
+    }
+    return $last_stage
+}
+
+function Set-LastStage($last_stage) {
+    $last_stage += 1
+    $last_stage > $global:state_file
+    Write-Host ("Stored Last Stage = " + $last_stage)
+}
+
+function Step-Stage($last_stage, $command) {
+    if ($last_stage -eq $global:check_stage) {
+        Invoke-Expression $command
+        Set-LastStage $last_stage
+        shutdown /r
+    }
+    $global:check_stage += 1
+}
+
+
+function SetupWindowsUpdates {
+    Write-Host ("installing NuGet, PSWIndowsUpdate ...")
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Install-PackageProvider -Name NuGet -Force
+    Install-Module PSWindowsUpdate -Force
+
+    Write-Host ("enabling 'Install Updated automatically' ...")
+    $WUSettings = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
+    $WUSettings.NotificationLevel = 4
+    $WUSettings.Save()
+
+    Write-Host ("enabling 'Give me recommended updates the same way I receive important updates' ...")
+    Set-WUSettings -AutoInstallMinorUpdates -NoAutoRebootWithLoggedOnUsers -IncludeRecommendedUpdates -confirm:$False
+
+    Write-Host ("enabling 'Give me updates for other microsoft Products when I update Windows' ...")
+    $ServiceManager = (New-Object -com "Microsoft.Update.ServiceManager")
+    $ServiceManager.Services
+    $ServiceID = "7971f918-a847-4430-9279-4a52d1efe18d"
+    $ServiceManager.AddService2($ServiceId, 7, "")
+
+    Write-Host ("installing all available windows updates ...")
+    Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
+}
+
+
 function RestartExplorer {
     # restart explorer
     taskkill /f /im explorer.exe
@@ -57,47 +111,50 @@ function InstallConfigFiles($repo) {
     Invoke-WebRequest -uri "$repo/win_terminal.json" -OutFile C:\Users\pteo9\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 }
 
+function SetupWSL() {
+    choco install wsl-ubuntu-2004 -y
+    $username = "tpetrescu"
+    $password = "1234"
+    Ubuntu2004 install --root
+    Ubuntu2004 run useradd -m $username
+    #Ubuntu2004 run usermod --password '$(echo 1 | openssl passwd -1 -stdin)' $username
+    Ubuntu2004 run usermod --password $password $username
+    Ubuntu2004 run usermod -aG sudo $username
+    Ubuntu2004 config --default-user $username
+}
+
+function FirstBoot() {
+    ConfigureWindows $desktops
+    InstallChoclatey 
+    InstallApps $desktops $basic_apps
+    InstallApps $desktops $dev_apps
+    ImportTaskbarLayout $repo
+    InstallConfigFiles $repo
+}
 
 $repo = "https://raw.githubusercontent.com/deckard93/install/master"
 $basic_apps = @(
     'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
-    'k-litecodecpackfull', 'spotify', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
-    'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client'
+    'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
+    'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client'#, 'spotify'
 )
 $dev_apps = @(
-    'git.install', 'microsoft-windows-terminal', 'vscode', 'javaruntime', 'vmware-workstation-player', 'virtualbox', 'postman', 
-    'dbeaver', 'dotnet4.0', 'androidstudio', 'visualstudio2019community', 'intellijidea-community', 'docker-desktop'
+    'git.install', 'microsoft-windows-terminal', 'vscode', 'javaruntime', 'virtualbox', 'postman', 
+    'dbeaver', 'dotnet4.0', 'androidstudio', 'visualstudio2019community', 'intellijidea-community', 'docker-desktop', 'wsl'#, 'vmware-workstation-player'
     # 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev', 'python', 'python2'
 )
 $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
 
-ConfigureWindows $desktops
-InstallChoclatey 
-InstallApps $desktops $basic_apps
-InstallApps $desktops $dev_apps
-ImportTaskbarLayout $repo
-InstallConfigFiles $repo
+$last_stage = Get-LastStage
+Write-Host ("Last Stage: " + $last_stage)
+Step-Stage $last_stage "FirstBoot"
+Step-Stage $last_stage "SetupWSL"
+Write-Host "finished script run ..."
+
 
 
 # non-choclatey items
 # GDS video thumbnailer https://www.gdsoftware.dk/More.aspx?id=7
-
-
-# install WSL
-choco install wsl -y # needs restart
-choco install wsl-ubuntu-2004 -y
-
-$username = "tpetrescu"
-$password = "1234"
-Ubuntu2004 install --root
-Ubuntu2004 run useradd -m $username
-#Ubuntu2004 run usermod --password '$(echo 1 | openssl passwd -1 -stdin)' $username
-Ubuntu2004 run usermod --password $password $username
-Ubuntu2004 run usermod -aG sudo $username
-Ubuntu2004 config --default-user $username
-
-
-Write-Host "Done with setup."
 
 
