@@ -33,20 +33,6 @@ function SetupWindowsUpdates {
     Install-PackageProvider -Name NuGet -Force
     Install-Module PSWindowsUpdate -Force
 
-    Write-Host ("enabling 'Install Updated automatically' ...")
-    $WUSettings = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
-    $WUSettings.NotificationLevel = 4
-    $WUSettings.Save()
-
-    Write-Host ("enabling 'Give me recommended updates the same way I receive important updates' ...")
-    Set-WUSettings -AutoInstallMinorUpdates -NoAutoRebootWithLoggedOnUsers -IncludeRecommendedUpdates -confirm:$False
-
-    Write-Host ("enabling 'Give me updates for other microsoft Products when I update Windows' ...")
-    $ServiceManager = (New-Object -com "Microsoft.Update.ServiceManager")
-    $ServiceManager.Services
-    $ServiceID = "7971f918-a847-4430-9279-4a52d1efe18d"
-    $ServiceManager.AddService2($ServiceId, 7, "")
-
     Write-Host ("installing all available windows updates ...")
     Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
 }
@@ -115,19 +101,17 @@ function SetupWSL() {
     choco install wsl-ubuntu-1804 -y
     $username = "tpetrescu"
     $password = "1234"
-    Ubuntu2004 install --root
-    Ubuntu2004 run useradd -m $username
-    #Ubuntu2004 run usermod --password '$(echo 1 | openssl passwd -1 -stdin)' $username
-    Ubuntu2004 run usermod --password $password $username
-    Ubuntu2004 run usermod -aG sudo $username
-    Ubuntu2004 config --default-user $username
+    Ubuntu1804 install --root
+    Ubuntu1804 run useradd -m $username
+    Ubuntu1804 run usermod --password $password $username
+    Ubuntu1804 run usermod -aG sudo $username
+    Ubuntu1804 config --default-user $username
 }
 
 function InstallOffice() {
     choco install -y microsoft-office-deployment --params '/64bit /Product:Professional2019Retail /Exclude=Publisher,Lync,Groove,Access,Publisher'
 }
-
-function FirstBoot() {
+function InstallAppsAndConfigs() {
     ConfigureWindows $desktops
     InstallChoclatey 
     InstallApps $desktops $basic_apps
@@ -153,8 +137,10 @@ $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
 $last_stage = Get-LastStage
 Write-Host ("Last Stage: " + $last_stage)
-Step-Stage $last_stage "FirstBoot"
-Step-Stage $last_stage "SetupWSL"
+Step-Stage $last_stage "SetupWindowsUpdates"
+Step-Stage $last_stage "SetupWindowsUpdates"
+#Step-Stage $last_stage "InstallAppsAndConfigs"
+#Step-Stage $last_stage "SetupWSL"
 Write-Host "finished script run ..."
 
 
