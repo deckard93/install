@@ -12,6 +12,10 @@
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Notepad++\notepad++.exe" />
 		<taskbar:UWA AppUserModelID="SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify" />
+		<taskbar:UWA AppUserModelID="Microsoft.Office.OneNote_16001.14326.20588.0_x64__8wekyb3d8bbwe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath= "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"/>
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Google\Chrome\Application\chrome.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft VS Code\Code.exe" />
