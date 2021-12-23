@@ -37,7 +37,6 @@ function SetupWindowsUpdates {
     Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
 }
 
-
 function RestartExplorer {
     # restart explorer
     taskkill /f /im explorer.exe
@@ -86,10 +85,49 @@ function InstallApps($desktops, $app_list) {
 }
 
 function ImportTaskbarLayout($repo) {
-    $temp_file = New-TemporaryFile
-    Invoke-WebRequest -uri "$repo/taskbar.xml" -OutFile $temp_file
-    Import-StartLayout -LayoutPath $temp_file -MountPath "C:\"
-    RestartExplorer
+    $Shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:APPDATA\OneNote.lnk")
+    $Shortcut.TargetPath = "shell:AppsFolder\Microsoft.Office.OneNote_8wekyb3d8bbwe!microsoft.onenoteim"
+    $Shortcut.Save()
+
+    $Shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:APPDATA\WinTerminal.lnk")
+    $Shortcut.TargetPath = "shell:AppsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"
+    $Shortcut.Save()
+
+    $Shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:APPDATA\SoundRecorder.lnk")
+    $Shortcut.TargetPath = "shell:AppsFolder\Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe!App"
+    $Shortcut.Save()
+
+    $pin_util = "PinUtil.exe"
+    Invoke-WebRequest -uri "$repo/PinUtil.exe" -OutFile $pin_util
+    $app_list = @(
+        "%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk",
+		"C:\Program Files\Notepad++\notepad++.exe",
+		"C:\Program Files\Oracle\VirtualBox\VirtualBox.exe",
+		"%APPDATA%\Microsoft\Windows\Start Menu\Programs\Spotify.lnk",
+		"C:\Program Files\Google\Chrome\Application\chrome.exe",
+		"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe",
+		"C:\Program Files\Microsoft VS Code\Code.exe",
+		"C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3\bin\idea64.exe",
+		"C:\Program Files\Android\Android Studio\bin\studio64.exe",
+		"C:\Program Files\DBeaver\dbeaver.exe",
+        "%APPDATA%\OneNote.lnk",
+		"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE",
+		"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE",
+		"C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE",
+		"%APPDATA%\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk",
+		"%APPDATA%\Microsoft\Windows\Start Menu\Programs\WhatsApp\WhatsApp.lnk",
+		"C:\Program Files (x86)\Steam\steam.exe",
+		"C:\Program Files (x86)\VMware\VMware Player\vmplayer.exe",
+        "%APPDATA%\WinTerminal.lnk",
+        "%APPDATA%\SoundRecorder.lnk"
+    )
+
+    foreach ($app in $app_list) {
+        & ".\$pin_util" "TaskBar", $app
+        Start-Sleep -s 1
+    }
+    
+    Remove-Item $pin_util
 }
 
 function InstallConfigFiles($repo) {
@@ -165,7 +203,6 @@ Step-Stage $last_stage "InstallDevApps2"
 Step-Stage $last_stage "InstallConfigs"
 Step-Stage $last_stage "SetupWSL"
 Write-Host "finished script run ..."
-
 
 
 # non-choclatey items
