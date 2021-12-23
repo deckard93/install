@@ -11,7 +11,7 @@
         <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Notepad++\notepad++.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" />
-		<taskbar:DesktopApp DesktopApplicationLinkPath="%LOCALAPPDATA%\Roaming\Spotify\Spotify.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Spotify\Spotify.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Google\Chrome\Application\chrome.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe" />		
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft VS Code\Code.exe" />
