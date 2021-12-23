@@ -113,9 +113,29 @@ function InstallOffice() {
 }
 
 function InstallBasicApps() {
+    $basic_apps = @(
+        'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
+        'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
+        'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify'
+    )
+
     InstallChoclatey 
     InstallApps $desktops $basic_apps
     InstallOffice
+}
+
+function InstallDevApps1() {
+    $apps = @('vscode', 'virtualbox', 'wsl')
+    InstallApps $desktops $apps
+}
+
+function InstallDevApps2() {
+    $apps = @(
+        'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman', 
+        'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
+        # 'python2', 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
+    )
+    InstallApps $desktops $apps
 }
 
 function InstallConfigs() {
@@ -125,17 +145,6 @@ function InstallConfigs() {
 }
 
 $repo = "https://raw.githubusercontent.com/deckard93/install/master"
-$basic_apps = @(
-    'spotify', 'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
-    'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
-    'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client' 
-)
-$dev_apps_1 = @('vscode','virtualbox', 'wsl')
-$dev_apps_2 = @(
-    'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman', 
-    'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
-    # 'python2', 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
-)
 $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
 
@@ -144,8 +153,8 @@ Write-Host ("Last Stage: " + $last_stage)
 #Step-Stage $last_stage "SetupWindowsUpdates"
 #Step-Stage $last_stage "SetupWindowsUpdates"
 Step-Stage $last_stage "InstallBasicApps"
-Step-Stage $last_stage "InstallApps $desktops $dev_apps_1"
-Step-Stage $last_stage "InstallApps $desktops $dev_apps_2"
+Step-Stage $last_stage "InstallDevApps1"
+Step-Stage $last_stage "InstallDevApps2"
 Step-Stage $last_stage "InstallConfigs"
 #Step-Stage $last_stage "SetupWSL"
 Write-Host "finished script run ..."
