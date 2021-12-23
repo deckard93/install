@@ -98,14 +98,14 @@ function InstallConfigFiles($repo) {
 }
 
 function SetupWSL() {
-    choco install wsl-ubuntu-1804 -y
+    choco install wsl-ubuntu-2004 -y
     $username = "tpetrescu"
     $password = "1234"
-    Ubuntu1804 install --root
-    Ubuntu1804 run useradd -m $username
-    Ubuntu1804 run usermod --password $password $username
-    Ubuntu1804 run usermod -aG sudo $username
-    Ubuntu1804 config --default-user $username
+    Ubuntu2004 install --root
+    Ubuntu2004 run useradd -m $username
+    Ubuntu2004 run usermod --password $password $username
+    Ubuntu2004 run usermod -aG sudo $username
+    Ubuntu2004 config --default-user $username
 }
 
 function InstallOffice() {
