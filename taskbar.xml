@@ -11,7 +11,7 @@
         <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Notepad++\notepad++.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" />
-		<taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Roaming\Spotify\Spotify.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%LOCALAPPDATA%\Roaming\Spotify\Spotify.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Google\Chrome\Application\chrome.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe" />		
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft VS Code\Code.exe" />
@@ -22,8 +22,8 @@
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"/>
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE" />
-		<taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Local\Discord\Update.exe --processStart Discord.exe"/>
-		<taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Local\WhatsApp\WhatsApp.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%LOCALAPPDATA%\Local\Discord\Update.exe --processStart Discord.exe"/>
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%LOCALAPPDATA%\Local\WhatsApp\WhatsApp.exe" />
 		<taskbar:UWA AppUserModelID="5319275A.WhatsAppDesktop_cv1g1gvanyjgm!WhatsAppDesktop"/>
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Steam\steam.exe"/>
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\VMware\VMware Player\vmplayer.exe" />
