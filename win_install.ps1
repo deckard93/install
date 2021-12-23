@@ -123,14 +123,14 @@ function InstallAppsAndConfigs() {
 
 $repo = "https://raw.githubusercontent.com/deckard93/install/master"
 $basic_apps = @(
-    'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
+    'spotify', 'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
     'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
-    'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client'#, 'spotify'
+    'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client' 
 )
 $dev_apps = @(
-    'git.install', 'microsoft-windows-terminal', 'vscode', 'javaruntime', 'virtualbox', 'postman', 
-    'dbeaver', 'dotnet4.0', 'androidstudio', 'visualstudio2019community', 'intellijidea-community', 'docker-desktop', 'wsl'#, 'vmware-workstation-player'
-    # 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev', 'python', 'python2'
+    'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'vscode', 'javaruntime', 'virtualbox', 'postman', 
+    'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'wsl'
+    #'python', 'python2', 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
 )
 $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
