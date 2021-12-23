@@ -11,21 +11,24 @@
         <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\System Tools\File Explorer.lnk" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Notepad++\notepad++.exe" />
-		<taskbar:UWA AppUserModelID="SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify" />
-		<taskbar:UWA AppUserModelID="Microsoft.Office.OneNote_16001.14326.20588.0_x64__8wekyb3d8bbwe" />
+		<taskbar:UWA AppUserModelID="Microsoft.WindowsTerminal_8wekyb3d8bbwe!App" />
+		<taskbar:UWA AppUserModelID="Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe!App" />
+		<taskbar:UWA AppUserModelID="5319275A.WhatsAppDesktop_cv1g1gvanyjgm!WhatsAppDesktop" />
+		<taskbar:UWA AppUserModelID="Microsoft.Office.OneNote_8wekyb3d8bbwe!microsoft.onenoteim" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE" />
-		<taskbar:DesktopApp DesktopApplicationLinkPath= "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"/>
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"/>
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Steam\steam.exe"/>
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Google\Chrome\Application\chrome.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Microsoft VS Code\Code.exe" />
-		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.3\bin\idea64.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3\bin\idea64.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Android\Android Studio\bin\studio64.exe" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\DBeaver\dbeaver.exe" />
-		<taskbar:DesktopApp DesktopApplicationLinkPath="%HOMEPATH%\AppData\Local\WhatsApp\WhatsApp.exe" />
-		<taskbar:UWA AppUserModelID="Microsoft.WindowsTerminal_8wekyb3d8bbwe!App" />
 		<taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\VMware\VMware Player\vmplayer.exe" />
-		<taskbar:UWA AppUserModelID="Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe!App" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%HOMEPATH%\AppData\Local\WhatsApp\WhatsApp.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%HOMEPATH%\AppData\Roaming\Spotify\Spotify.exe" />
+		<taskbar:DesktopApp DesktopApplicationLinkPath="%HOMEPATH%\AppData\Local\Discord\Update.exe --processStart Discord.exe" />
       </taskbar:TaskbarPinList>
     </defaultlayout:TaskbarLayout>
   </CustomTaskbarLayoutCollection>
