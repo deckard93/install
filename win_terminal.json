@@ -34,7 +34,7 @@
             },
             {
                 "colorScheme": "Solarized Dark",
-                "commandline": "wsl -d Ubuntu-18.04",
+                "commandline": "wsl",
                 "guid": "{7fb65d4a-5d93-40e4-993c-04b1a962c2ef}",
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
