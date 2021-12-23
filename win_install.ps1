@@ -111,12 +111,15 @@ function SetupWSL() {
 function InstallOffice() {
     choco install -y microsoft-office-deployment --params '/64bit /Product:Professional2019Retail /Exclude=Publisher,Lync,Groove,Access,Publisher'
 }
-function InstallAppsAndConfigs() {
-    ConfigureWindows $desktops
+
+function InstallBasicApps() {
     InstallChoclatey 
     InstallApps $desktops $basic_apps
-    InstallApps $desktops $dev_apps
     InstallOffice
+}
+
+function InstallConfigs() {
+    ConfigureWindows $desktops
     ImportTaskbarLayout $repo
     InstallConfigFiles $repo
 }
@@ -127,10 +130,11 @@ $basic_apps = @(
     'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
     'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client' 
 )
-$dev_apps = @(
-    'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'vscode', 'javaruntime', 'virtualbox', 'postman', 
-    'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'wsl'
-    #'python', 'python2', 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
+$dev_apps_1 = @('vscode','virtualbox', 'wsl')
+$dev_apps_2 = @(
+    'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman', 
+    'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
+    # 'python2', 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
 )
 $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
@@ -139,7 +143,10 @@ $last_stage = Get-LastStage
 Write-Host ("Last Stage: " + $last_stage)
 #Step-Stage $last_stage "SetupWindowsUpdates"
 #Step-Stage $last_stage "SetupWindowsUpdates"
-Step-Stage $last_stage "InstallAppsAndConfigs"
+Step-Stage $last_stage "InstallBasicApps"
+Step-Stage $last_stage "InstallApps $desktops $dev_apps_1"
+Step-Stage $last_stage "InstallApps $desktops $dev_apps_2"
+Step-Stage $last_stage "InstallConfigs"
 #Step-Stage $last_stage "SetupWSL"
 Write-Host "finished script run ..."
 
