@@ -157,12 +157,12 @@ $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
 $last_stage = Get-LastStage
 Write-Host ("Last Stage: " + $last_stage)
-#Step-Stage $last_stage "SetupWindowsUpdates"
-#Step-Stage $last_stage "SetupWindowsUpdates"
-#Step-Stage $last_stage "InstallBasicApps"
-#Step-Stage $last_stage "InstallDevApps1"
-#Step-Stage $last_stage "InstallDevApps2"
-#Step-Stage $last_stage "InstallConfigs"
+Step-Stage $last_stage "SetupWindowsUpdates"
+Step-Stage $last_stage "SetupWindowsUpdates"
+Step-Stage $last_stage "InstallBasicApps"
+Step-Stage $last_stage "InstallDevApps1"
+Step-Stage $last_stage "InstallDevApps2"
+Step-Stage $last_stage "InstallConfigs"
 Step-Stage $last_stage "SetupWSL"
 Write-Host "finished script run ..."
 
