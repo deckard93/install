@@ -97,6 +97,12 @@ function InstallConfigFiles($repo) {
     Invoke-WebRequest -uri "$repo/win_terminal.json" -OutFile C:\Users\pteo9\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 }
 
+function DisableStartupApps() {
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Discord"
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "NetLimiter"
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Spotify"
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Steam"
+}
 function SetupWSL() {
     choco install wsl-ubuntu-2004 -y
     $username = "tpetrescu"
@@ -142,6 +148,7 @@ function InstallConfigs() {
     ConfigureWindows $desktops
     ImportTaskbarLayout $repo
     InstallConfigFiles $repo
+    DisableStartupApps
 }
 
 $repo = "https://raw.githubusercontent.com/deckard93/install/master"
