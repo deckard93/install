@@ -147,16 +147,14 @@ function SetupWSL() {
     $username = "deckard"
     $password = "1234"
     Ubuntu2004 install --root
-    $LinuxRootInstallScript = "C:\scripts\linux_root_install.sh"
-    $LinuxUserInstallScript = "C:\scripts\linux_user_install.sh"
-    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/deckard93/install/master/linux_root_install.sh", $LinuxRootInstallScript)
-    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/deckard93/install/master/linux_user_install.sh", $LinuxUserInstallScript)
-    bash $LinuxRootInstallScript
+    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/deckard93/install/master/linux_root_install.sh", "C:\scripts\linux_root_install.sh")
+    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/deckard93/install/master/linux_user_install.sh", "C:\scripts\linux_user_install.sh")
+    bash "/mnt/c/scripts/linux_root_install.sh"
     wsl useradd -m -s /usr/bin/bash $username
     wsl usermod -aG sudo $username
     wsl usermod --password "`$(echo $password | openssl passwd -1 -stdin)" $username
     Ubuntu2004 config --default-user $username
-    bash $LinuxUserInstallScript
+    bash "/mnt/c/scripts/linux_user_install.sh"
 }
 
 function InstallOffice() {
@@ -184,7 +182,7 @@ function InstallDevApps2() {
     $apps = @(
         'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman', 
         'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
-        # 'python2', 'terraform', 'openjdk', 'jdk8', 'yarn', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
+        # 'python2', 'openjdk', 'jdk8', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
     )
     InstallApps $desktops $apps
 }
