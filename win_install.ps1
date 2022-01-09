@@ -133,6 +133,7 @@ function ImportTaskbarLayout($repo) {
 function InstallConfigFiles($repo) {
     # windows terminal
     New-Item -ItemType SymbolicLink -Force -Path "C:\Users\pteo9\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Target "C:\Users\pteo9\OneDrive\Configs\win_terminal.json"
+    New-Item -ItemType SymbolicLink -Force -Path "C:\Users\pteo9\AppData\Roaming\AltDrag\AltDrag.ini" -Target "C:\Users\pteo9\OneDrive\Configs\altdrag.ini"
 }
 
 function DisableStartupApps() {
@@ -160,7 +161,7 @@ function InstallBasicApps() {
     $basic_apps = @(
         'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
         'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
-        'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify'
+        'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify', 'altdrag'
     )
 
     InstallChoclatey 
