@@ -147,10 +147,16 @@ function SetupWSL() {
     $username = "deckard"
     $password = "1234"
     Ubuntu2004 install --root
+    $LinuxRootInstallScript = "C:\scripts\linux_root_install.sh"
+    $LinuxUserInstallScript = "C:\scripts\linux_user_install.sh"
+    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/deckard93/install/master/linux_root_install.sh", $LinuxRootInstallScript)
+    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/deckard93/install/master/linux_user_install.sh", $LinuxUserInstallScript)
+    bash $LinuxRootInstallScript
     wsl useradd -m -s /usr/bin/bash $username
     wsl usermod -aG sudo $username
     wsl usermod --password "`$(echo $password | openssl passwd -1 -stdin)" $username
     Ubuntu2004 config --default-user $username
+    bash $LinuxUserInstallScript
 }
 
 function InstallOffice() {
