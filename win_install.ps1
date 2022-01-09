@@ -143,12 +143,12 @@ function DisableStartupApps() {
 }
 function SetupWSL() {
     choco install wsl-ubuntu-2004 -y
-    $username = "tpetrescu"
+    $username = "deckard"
     $password = "1234"
     Ubuntu2004 install --root
-    Ubuntu2004 run useradd -m $username
-    Ubuntu2004 run usermod --password $password $username
-    Ubuntu2004 run usermod -aG sudo $username
+    wsl useradd -m -s /usr/bin/bash $username
+    wsl usermod -aG sudo $username
+    wsl usermod --password "`$(echo $password | openssl passwd -1 -stdin)" $username
     Ubuntu2004 config --default-user $username
 }
 
