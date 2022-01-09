@@ -12,7 +12,6 @@ sudo apt-get install -y awscli
 sudo apt-get install -y ethtool
 sudo apt-get install -y pkg-config
 sudo apt-get install -y libpcap-dev
-sudo apt-get install -y wireshark-qt
 sudo apt-get install -y build-essential
 sudo apt-get install -y python3 python3-pip
 # pyenv depdendencies
