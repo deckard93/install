@@ -50,7 +50,7 @@ function ConfigureWindows($desktops) {
     # open explorer to my pc by default
     Set-Itemproperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Type 'DWord' -Name 'LaunchTo' -value '1'
 
-    # configure user account control settings (UAC)
+    # configure user account control settings (UAC) - Note this will make everything run with max priviledges
     New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -PropertyType DWord -Value 0 -Force
     New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name PromptOnSecureDesktop -PropertyType DWord -Value 0 -Force
 
@@ -132,7 +132,7 @@ function ImportTaskbarLayout($repo) {
 
 function InstallConfigFiles($repo) {
     # windows terminal
-    Invoke-WebRequest -uri "$repo/win_terminal.json" -OutFile C:\Users\pteo9\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+    New-Item -ItemType SymbolicLink -Force -Path "C:\Users\pteo9\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Target "C:\Users\pteo9\OneDrive\Configs\win_terminal.json"
 }
 
 function DisableStartupApps() {
@@ -192,7 +192,7 @@ function InstallConfigs() {
 function Cleanup() {
     # disable auto-log in
     $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
-    Set-ItemProperty $RegistryPath 'AutoAdminLogon' -Value "0" -Type String 
+    Remove-ItemProperty $RegistryPath 'AutoAdminLogon'
     Remove-ItemProperty $RegistryPath 'DefaultUsername' 
     Remove-ItemProperty $RegistryPath 'DefaultPassword'
 }
