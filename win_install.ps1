@@ -189,6 +189,14 @@ function InstallConfigs() {
     DisableStartupApps
 }
 
+function Cleanup() {
+    # disable auto-log in
+    $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+    Set-ItemProperty $RegistryPath 'AutoAdminLogon' -Value "0" -Type String 
+    Remove-ItemProperty $RegistryPath 'DefaultUsername' 
+    Remove-ItemProperty $RegistryPath 'DefaultPassword'
+}
+
 $repo = "https://raw.githubusercontent.com/deckard93/install/master"
 $desktops = "$env:PUBLIC\Desktop", "$env:USERPROFILE\Desktop"
 
@@ -202,6 +210,7 @@ Step-Stage $last_stage "InstallDevApps1"
 Step-Stage $last_stage "InstallDevApps2"
 Step-Stage $last_stage "InstallConfigs"
 Step-Stage $last_stage "SetupWSL"
+Step-Stage $last_stage "Cleanup"
 Write-Host "finished script run ..."
 
 
