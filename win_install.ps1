@@ -165,7 +165,7 @@ function InstallBasicApps() {
     $basic_apps = @(
         'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
         'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
-        'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify', 'altdrag'
+        'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify', 'altdrag', 'speccy'
     )
 
     InstallChoclatey 
