@@ -182,7 +182,7 @@ function InstallDevApps2() {
     $apps = @(
         'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman',
         'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
-        # 'wireshark', 'python2', 'openjdk', 'jdk8', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
+        # 'mediainfo', 'wireshark', 'python2', 'openjdk', 'jdk8', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
     )
     InstallApps $desktops $apps
 }
