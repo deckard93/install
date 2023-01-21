@@ -126,7 +126,7 @@ function ImportTaskbarLayout($repo) {
         & ".\$pin_util" "TaskBar", $app
         Start-Sleep -s 1
     }
-    
+
     Remove-Item $pin_util
 }
 
@@ -163,12 +163,12 @@ function InstallOffice() {
 
 function InstallBasicApps() {
     $basic_apps = @(
-        'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity', 
-        'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension', 
+        'googlechrome', 'vlc', 'notepadplusplus', 'winscp', 'filezilla', 'whatsapp', 'teamviewer', 'windirstat', 'audacity',
+        'k-litecodecpackfull', 'winrar', '7zip', 'blender', 'hwmonitor', 'adobedigitaleditions', 'linkshellextension',
         'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify', 'altdrag', 'speccy'
     )
 
-    InstallChoclatey 
+    InstallChoclatey
     InstallApps $desktops $basic_apps
     InstallOffice
 }
@@ -180,9 +180,9 @@ function InstallDevApps1() {
 
 function InstallDevApps2() {
     $apps = @(
-        'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman', 
+        'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman',
         'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
-        # 'python2', 'openjdk', 'jdk8', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
+        # 'wireshark', 'python2', 'openjdk', 'jdk8', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
     )
     InstallApps $desktops $apps
 }
@@ -198,7 +198,7 @@ function Cleanup() {
     # disable auto-log in
     $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
     Remove-ItemProperty $RegistryPath 'AutoAdminLogon'
-    Remove-ItemProperty $RegistryPath 'DefaultUsername' 
+    Remove-ItemProperty $RegistryPath 'DefaultUsername'
     Remove-ItemProperty $RegistryPath 'DefaultPassword'
 }
 
