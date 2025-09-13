@@ -11,3 +11,6 @@ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 source ~/.profile
 pyenv install 3.6.0
 pyenv global 3.6.0
+
+# install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
