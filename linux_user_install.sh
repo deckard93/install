@@ -14,3 +14,6 @@ pyenv global 3.6.0
 
 # install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+
+# install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
