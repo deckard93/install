@@ -22,6 +22,8 @@ sudo apt-get install -y python3 python3-pip
 # pyenv depdendencies
 sudo apt-get install -y libbz2-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev
 
+# markdown console formatter 
+sudo snap install glow
 
 # terraform install
 # https://www.hashicorp.com/blog/announcing-the-hashicorp-linux-repository
