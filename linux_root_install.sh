@@ -8,14 +8,15 @@ sudo apt-get update
 
 # tools
 sudo apt-get install -y jq
-sudo apt-get install -y git
 sudo apt-get install -y xsel # clipboard
 sudo apt-get install -y cmake
 sudo apt-get install -y clang
 sudo apt-get install -y awscli
+sudo apt-get install -y ffmpeg
 sudo apt-get install -y ethtool
 sudo apt-get install -y pkg-config
 sudo apt-get install -y libpcap-dev
+sudo apt-get install -y git curl wget
 sudo apt-get install -y build-essential
 sudo apt-get install -y python3 python3-pip
 # pyenv depdendencies
