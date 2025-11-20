@@ -45,10 +45,10 @@ function RestartExplorer {
 
 function ConfigureWindows($desktops) {
     # disable files/folders getting autoadded to quick access
-    Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Type 'DWord' -Name 'ShowFrequent' -value '0'
-    Set-Itemproperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Type 'DWord' -Name 'ShowRecent' -value '0'
+    Set-ItemProperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Type 'DWord' -Name 'ShowFrequent' -value '0'
+    Set-ItemProperty -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Type 'DWord' -Name 'ShowRecent' -value '0'
     # open explorer to my pc by default
-    Set-Itemproperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Type 'DWord' -Name 'LaunchTo' -value '1'
+    Set-ItemProperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Type 'DWord' -Name 'LaunchTo' -value '1'
 
     # configure user account control settings (UAC) - Note this will make everything run with max priviledges
     New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -PropertyType DWord -Value 0 -Force
@@ -67,7 +67,7 @@ function ConfigureWindows($desktops) {
     RestartExplorer
 }
 
-function InstallChoclatey {
+function InstallChocolatey {
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     choco install chocolatey-core.extension -y
@@ -168,7 +168,7 @@ function InstallBasicApps() {
         'netlimiter', 'autohotkey', 'discord', 'qbittorrent', 'steam-client', 'spotify', 'altdrag', 'speccy'
     )
 
-    InstallChoclatey
+    InstallChocolatey
     InstallApps $desktops $basic_apps
     InstallOffice
 }
@@ -180,9 +180,9 @@ function InstallDevApps1() {
 
 function InstallDevApps2() {
     $apps = @(
-        'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'microsoft-windows-terminal', 'javaruntime', 'postman',
-        'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn'
-        # 'mediainfo', 'wireshark', 'python2', 'openjdk', 'jdk8', 'nvm', 'itunes -y # optional - for managing iphone dev dev'
+        'visualstudio2019community', 'vmware-workstation-player', 'git.install', 'pyenv-win', 'microsoft-windows-terminal', 'javaruntime', 'postman',
+        'dbeaver', 'dotnet4.0', 'androidstudio', 'intellijidea-community', 'docker-desktop', 'python', 'terraform', 'yarn', 'nvm', 'oh-my-posh'
+        # 'mediainfo', 'wireshark', 'openjdk', 'jdk8', 'itunes -y # optional - for managing iphone dev dev'
     )
     InstallApps $desktops $apps
 }
